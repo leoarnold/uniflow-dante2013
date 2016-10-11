@@ -1,0 +1,40 @@
+% Pseudo Shell-Script
+\ifx\condition\undefined
+  \immediate\write18{
+    R CMD Sweave "\jobname.Rnw"}
+  \immediate\write18{
+    pdflatex "\gdef\string\condition{0} \string\input\space\jobname"}
+  \expandafter\stop
+\fi
+
+% Eigentliches Dokument
+\documentclass[DIV12,paper=A6,pagesize]{scrartcl}
+
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\setlength{\parindent}{0mm}
+
+\begin{document}
+
+\LARGE
+
+\textbf{Laplace-Würfeln}
+
+\begin{center}
+
+\setkeys{Gin}{width=.65\linewidth}
+
+<< echo=FALSE,fig=TRUE >>=
+par(ps=20)
+pips <- sample(1:6,100,replace=TRUE)
+hist(pips, breaks=c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5),col="gray",freq=FALSE,main="",xlab="Augenzahl",ylab="relative Häufigkeit")
+@
+
+<<echo=FALSE,fig=TRUE>>=
+pie(table(pips),col=c("white","black"),cex=2)
+@
+
+\end{center}
+
+\end{document}

@@ -1,0 +1,51 @@
+% Pseudo Shell-Script
+\ifx\condition\undefined
+  \immediate\write18{pdflatex --jobname=\jobname-Angabe
+    "\gdef\string\kondition{0} \string\input\space\jobname"}
+%  \immediate\write18{pdflatex --jobname=\jobname-MuLoe
+%    "\gdef\string\condition{1} \string\input\space\jobname"}
+  \expandafter\stop
+\fi
+
+% Fallunterscheidung
+\RequirePackage{comment}
+\ifcase\condition
+  \includecomment{aufgabe}
+  \excludecomment{loesung}
+\or
+  \includecomment{aufgabe}
+  \includecomment{loesung}
+\fi
+
+% Dokument-Präambel
+\documentclass[DIV12,paper=A6,pagesize]{scrartcl}
+
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\setlength{\parindent}{0mm}
+
+\begin{document}
+
+\LARGE
+
+\begin{aufgabe}
+\textbf{Aufgabe}
+
+Nennen Sie fünf Schriftarten, die Ihnen in einer Voll-Installation von \TeX{}live enthalten sind.
+\end{aufgabe}
+
+\begin{loesung}
+\bigskip
+
+\textit{Lösung:} Zum Beispiel:
+\begin{itemize}
+\item Computer Modern
+\item Times
+\item Helvetica
+\item Bera
+\item \TeX\ Gyre
+\end{itemize}
+
+\end{loesung}
+\end{document}

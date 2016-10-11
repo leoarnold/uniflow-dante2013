@@ -1,0 +1,46 @@
+% Pseudo Shell-Script
+\ifx\condition\undefined
+  \immediate\write18{%
+    pdflatex
+    "\gdef\string\condition{1}
+     \string\input\space\jobname"
+  }%
+  \immediate\write18{%
+    sage "\jobname.sagetex.sage"
+  }%
+  \immediate\write18{%
+    pdflatex "\gdef\string\condition{2} \string\input\space\jobname"
+  }%
+  \expandafter\stop
+\fi
+
+\documentclass[DIV12,paper=A6,pagesize]{scrartcl}
+
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\setlength{\parindent}{0mm}
+
+\usepackage{sagetex}
+
+\begin{document}
+
+\Large
+
+% 'sagesilent' erzeugt keine Ausgabe
+\begin{sagesilent}
+A = matrix(QQ, [[19,30,-20], [26,39,-26], [61,93,-62]])
+p = A.charpoly()
+\end{sagesilent}
+
+\textbf{Aufgabe}\\
+Berechne die Eigenwerte der Matrix
+\[ A = \sage{A} \]
+
+\textbf{Lösung}\\
+Charakteristische Polynom von $A$
+\[ \chi_A(x) = \sage{p} = \sage{factor(p)} \]
+Daher sind die Eigenwerte von $A$
+\[ \sage{A.eigenvalues()} \]
+
+\end{document}

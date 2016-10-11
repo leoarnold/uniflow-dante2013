@@ -1,0 +1,26 @@
+\ifx\condition\undefined
+  \immediate\write18{
+   pdflatex "\gdef\string\condition{0} \string\input\space\jobname"
+  }
+  \immediate\write18{
+   bibtex "\jobname"
+  }
+  \immediate\write18{
+   pdflatex "\gdef\string\condition{0} \string\input\space\jobname"
+  }
+    \immediate\write18{
+   pdflatex "\gdef\string\condition{0} \string\input\space\jobname"
+  }
+  \expandafter\stop
+\fi
+
+\documentclass[a4paper]{article}
+
+\begin{document}
+
+Jeder \LaTeX{}-Nutzer sollte das \TeX{}book\cite{arn:knuth} kennen.
+
+\bibliography{01BspBibtex}{}
+\bibliographystyle{plain}
+
+\end{document}
